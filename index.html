@@ -217,6 +217,21 @@
             /* Sharper blur makes it look thicker */
         }
 
+        .smoke-wisp {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            /* Very thin */
+            height: 100px;
+            /* Long tail */
+            background: linear-gradient(to top, rgba(200, 200, 200, 0) 0%, rgba(200, 200, 200, 0.4) 50%, transparent 100%);
+            filter: blur(4px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
         /* =========================================
            5. UI COMPONENTS (BUTTONS, CARDS, FOOTER)
         ========================================= */
@@ -551,6 +566,9 @@
                 <div id="luxury-smoke">
                     <div class="smoke-layer s-1"></div>
                     <div class="smoke-layer s-2"></div>
+                    <div class="smoke-wisp w-1"></div>
+                    <div class="smoke-wisp w-2"></div>
+                    <div class="smoke-wisp w-3"></div>
                 </div>
 
                 <div class="oud-stick">
@@ -753,7 +771,6 @@
             if (flameTween) flameTween.kill();
             gsap.to(flame, { scale: 0, autoAlpha: 0, duration: 0.4, overwrite: "auto" });
 
-            // Ember Pulse
             pulseTween = gsap.fromTo(oudTip,
                 { backgroundColor: "#2b1d16", boxShadow: "0 0 0px rgba(0,0,0,0)" },
                 { backgroundColor: "#ff4500", boxShadow: "0 -8px 40px 12px rgba(255, 69, 0, 0.7)", duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" }
@@ -761,23 +778,27 @@
 
             gsap.to(smokeContainer, { opacity: 1, duration: 1 });
 
-            // Generate Denser Smoke Particles
+            // 1. Regular Smoke Layers
             document.querySelectorAll(".smoke-layer").forEach((layer, i) => {
                 smokeTweens.push(gsap.fromTo(layer,
+                    { y: 0, opacity: 0, scale: 1.5 },
+                    { y: -350, x: "random(-15, 15)", opacity: 0.8, scale: 6, duration: 4 + i, repeat: -1, delay: i * 0.4, ease: "power1.out" }
+                ));
+            });
+
+            // 2. New Smoke Wisps (Tails)
+            document.querySelectorAll(".smoke-wisp").forEach((wisp, i) => {
+                smokeTweens.push(gsap.fromTo(wisp,
+                    { y: 0, opacity: 0, scaleY: 1 },
                     {
-                        y: 0,             // Starts exactly at the tip
-                        opacity: 0,
-                        scale: 1.5        // Large start for high density
-                    },
-                    {
-                        y: -300,
-                        x: "random(-10, 10)", // Narrower drift keeps it looking "solid"
-                        opacity: 0.8,
-                        scale: 6,
-                        duration: 4 + (i * 1.0), // Slightly faster rise
+                        y: -400,
+                        x: "random(-40, 40)", // Wider drift for the tails
+                        opacity: 0.5,
+                        scaleY: 2.5, // Stretches as it rises
+                        duration: 5 + (i * 1.5),
                         repeat: -1,
-                        delay: i * 0.3,       // Even shorter delay = more overlapping layers
-                        ease: "power1.out"
+                        delay: i * 0.8,
+                        ease: "sine.inOut" // Smoother, "lazier" movement
                     }
                 ));
             });
