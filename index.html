@@ -77,6 +77,7 @@
             opacity: 0.8;
             margin-bottom: 50px;
             text-align: center;
+            color: #fffb01;
         }
 
         /* =========================================
@@ -190,8 +191,8 @@
         ========================================= */
         #luxury-smoke {
             position: absolute;
-            bottom: 82%;
-            /* Adjusted from 95% to sit exactly on the tip */
+            bottom: 140px;
+            /* Changed from 82% to sit exactly on the 140px stick */
             left: 50%;
             transform: translateX(-50%);
             width: 120px;
@@ -219,17 +220,22 @@
 
         .smoke-wisp {
             position: absolute;
-            bottom: 0;
+            bottom: 140px;
+            /* Changed from 220px to match the stick height */
             left: 50%;
             transform: translateX(-50%);
-            width: 2px;
-            /* Very thin */
-            height: 100px;
-            /* Long tail */
-            background: linear-gradient(to top, rgba(200, 200, 200, 0) 0%, rgba(200, 200, 200, 0.4) 50%, transparent 100%);
+            width: 6px;
+            height: 180px;
+            background: linear-gradient(to top,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.8) 10%,
+                    rgba(200, 200, 200, 0.3) 60%,
+                    rgba(255, 255, 255, 0) 100%);
             filter: blur(4px);
             opacity: 0;
             pointer-events: none;
+            z-index: 6;
+            transform-origin: bottom center;
         }
 
         /* =========================================
@@ -566,10 +572,10 @@
                 <div id="luxury-smoke">
                     <div class="smoke-layer s-1"></div>
                     <div class="smoke-layer s-2"></div>
-                    <div class="smoke-wisp w-1"></div>
-                    <div class="smoke-wisp w-2"></div>
-                    <div class="smoke-wisp w-3"></div>
                 </div>
+                <div class="smoke-wisp w-1"></div>
+                <div class="smoke-wisp w-2"></div>
+                <div class="smoke-wisp w-3"></div>
 
                 <div class="oud-stick">
                     <div class="oud-tip">
@@ -786,21 +792,44 @@
                 ));
             });
 
-            // 2. New Smoke Wisps (Tails)
+            // 2. Cigarette-style Smoke Wisps (Tails)
             document.querySelectorAll(".smoke-wisp").forEach((wisp, i) => {
+                // Reset position
+                gsap.set(wisp, { opacity: 0, scaleY: 0, xPercent: -50, x: 0 });
+
                 smokeTweens.push(gsap.fromTo(wisp,
-                    { y: 0, opacity: 0, scaleY: 1 },
                     {
-                        y: -400,
-                        x: "random(-40, 40)", // Wider drift for the tails
-                        opacity: 0.5,
-                        scaleY: 2.5, // Stretches as it rises
-                        duration: 5 + (i * 1.5),
+                        scaleY: 0,
+                        opacity: 0,
+                        y: 0
+                    },
+                    {
+                        scaleY: 2.5,
+                        opacity: 0.7,
+                        y: -250, // Moves up while stretching
+                        duration: 5 + (i * 1),
                         repeat: -1,
-                        delay: i * 0.8,
-                        ease: "sine.inOut" // Smoother, "lazier" movement
+                        delay: i * 1.5,
+                        ease: "power1.out",
+                        onRepeat: () => {
+                            // Randomize horizontal drift each time it loops
+                            gsap.to(wisp, {
+                                x: gsap.utils.random(-30, 30),
+                                duration: 4,
+                                ease: "sine.inOut"
+                            });
+                        }
                     }
                 ));
+
+                // The "Wiggle" - This makes the tail wave side-to-side as it rises
+                smokeTweens.push(gsap.to(wisp, {
+                    rotation: i % 2 === 0 ? 5 : -5,
+                    duration: 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                }));
             });
         }
 
