@@ -852,9 +852,6 @@
                     smokeTweens.forEach(t => t.kill());
                     smokeTweens = [];
                     gsap.to([".smoke-layer", ".smoke-wisp", smokeContainer], { opacity: 0, duration: 0.5 });
-                    gsap.delayedCall(2, () => {
-                        updateSubtitle("Experience the tradition");
-                    });
                 }
             });
 
