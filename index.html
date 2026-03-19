@@ -291,22 +291,22 @@
         .scent-showcase-box {
             position: absolute;
             z-index: 10;
-            width: 250px;
-            height: 350px; 
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            background-color: #222; 
+            width: 320px; /* Slightly wider */
+            height: 320px; /* Square container for consistent Contain fitting */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
         }
 
         .box-img {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
+            max-width: 100%;
+            max-height: 100%;
+            /* Use contain to ensure the whole box image is visible without cropping */
+            object-fit: contain; 
             opacity: 0; 
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
         }
 
         #box-cover {
@@ -434,6 +434,11 @@
                 transform: translate(-50%, -50%);
                 text-align: center;
                 width: 90%;
+            }
+            .scent-showcase-box {
+                width: 280px;
+                height: 280px;
+                top: 40%;
             }
         }
         @media screen and (max-width: 600px) {
@@ -585,7 +590,7 @@
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OceanWoodeoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761769063" class="box-img" id="box-ocean">
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-MuskMalakieoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761768982" class="box-img" id="box-royal">
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-WardTaifieoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761769175" class="box-img" id="box-taifi">
-                    <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-LavenderJardineoud-IncenseSticks-ProductPhoto-1_3_1024x1024.jpg?v=1761733339" class="box-img" id="box-lavender">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-LavenderJardineoud-IncenseSticks-ProductPhoto-1_3_360x360.jpg?v=1761733339" class="box-img" id="box-lavender">
                     <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-ImperialSaffroneoud-IncenseSticks-ProductPhoto-1_4_1024x1024.png?v=1761733033" class="box-img" id="box-saffron">
                     <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-DehanOudMarokieoud-IncenseSticks-ProductPhoto-1_4_1024x1024.png?v=1761732941" class="box-img" id="box-maroki">
                     <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-CubanTobaccoeoud-IncenseSticks-ProductPhoto-1_3_1024x1024.png?v=1761732783" class="box-img" id="box-cuban">
@@ -749,9 +754,9 @@
                 scrub: 1,
                 snap: {
                     snapTo: "labels", 
-                    duration: { min: 0.2, max: 0.8 },
+                    duration: { min: 0.4, max: 1.2 }, 
                     delay: 0.1, 
-                    ease: "power1.inOut"
+                    ease: "power4.inOut" 
                 }              
             }
         });
@@ -759,16 +764,16 @@
         scentTL.set("#box-cover", { opacity: 1 });
 
         const scentConfigs = [
-            { id: 'azraq', color: '#1f130a', boxId: '#box-azraq', ingGroup: '#ing-azraq' },
-            { id: 'leather', color: '#1f130a', boxId: '#box-leather', ingGroup: '#ing-leather' },
-            { id: 'ocean',   color: '#0a1a24', boxId: '#box-ocean',   ingGroup: '#ing-ocean' },
-            { id: 'royal',   color: '#1d0b24', boxId: '#box-royal',   ingGroup: '#ing-royal' },
-            { id: 'taifi',   color: '#2e0a15', boxId: '#box-taifi',   ingGroup: '#ing-taifi' },
-            { id: 'lavender',color: '#120a2e', boxId: '#box-lavender',ingGroup: '#ing-lavender' },
-            { id: 'saffron', color: '#2e190a', boxId: '#box-saffron', ingGroup: '#ing-saffron' },
-            { id: 'maroki',  color: '#1c1c11', boxId: '#box-maroki',  ingGroup: '#ing-maroki' },
-            { id: 'cuban',   color: '#1a1005', boxId: '#box-cuban',   ingGroup: '#ing-cuban' },
-            { id: 'kalimantan', color: '#0a1a0f', boxId: '#box-kalimantan', ingGroup: '#ing-kalimantan' }
+            { id: 'azraq', color: '#001a33', boxId: '#box-azraq', ingGroup: '#ing-azraq' },
+            { id: 'leather', color: '#0a2e14', boxId: '#box-leather', ingGroup: '#ing-leather' },
+            { id: 'ocean', color: '#9acaff', boxId: '#box-ocean', ingGroup: '#ing-ocean' },
+            { id: 'royal', color: '#a57c00', boxId: '#box-royal', ingGroup: '#ing-royal' },
+            { id: 'taifi', color: '#e57399', boxId: '#box-taifi', ingGroup: '#ing-taifi' },
+            { id: 'lavender', color: '#4b0082', boxId: '#box-lavender', ingGroup: '#ing-lavender' },
+            { id: 'saffron', color: '#ccb899', boxId: '#box-saffron', ingGroup: '#ing-saffron' },
+            { id: 'maroki', color: '#4a0404', boxId: '#box-maroki', ingGroup: '#ing-maroki' },
+            { id: 'cuban', color: '#4e342e', boxId: '#box-cuban', ingGroup: '#ing-cuban' },
+            { id: 'kalimantan', color: '#1a1a1a', boxId: '#box-kalimantan', ingGroup: '#ing-kalimantan' }
         ];
 
         const panels = gsap.utils.toArray(".scent-panel");
@@ -778,15 +783,14 @@
             const ingredients = gsap.utils.toArray(`${config.ingGroup} .ingredient-item`);
 
             // 1. ENTER ANIMATIONS
-            // Use "<" to sync these animations relative to the start of this block
-            scentTL.to(".scents-pinned-stage", { backgroundColor: config.color, duration: 1 });
+            scentTL.to(".scents-pinned-stage", { backgroundColor: config.color, duration: 1, ease: "sine.inOut" });
             
             if (i === 0) {
-                scentTL.to("#box-cover", { opacity: 0, duration: 0.5 }, "<");
+                scentTL.to("#box-cover", { opacity: 0, duration: 0.8, ease: "sine.inOut" }, "<");
             }
             
-            scentTL.to(panel, { opacity: 1, x: 20, duration: 1 }, "<");
-            scentTL.to(config.boxId, { opacity: 1, duration: 1 }, "<");
+            scentTL.to(panel, { opacity: 1, x: 20, duration: 1, ease: "sine.inOut" }, "<");
+            scentTL.to(config.boxId, { opacity: 1, duration: 1, ease: "sine.inOut" }, "<");
 
             if (ingredients.length > 0) {
                 scentTL.to(ingredients, {
@@ -795,25 +799,23 @@
                     y: () => (Math.random() - 0.5) * 600,
                     rotation: () => Math.random() * 720,
                     scale: () => 0.8 + Math.random(), 
-                    duration: 1.5,
-                    ease: "back.out(1.2)", 
+                    duration: 1.8,
+                    ease: "sine.out", 
                     stagger: 0.05
                 }, "<");
             }
 
             // 2. PAUSE & SNAP POINT 
-            // We split the pause in half and put our ONLY label exactly in the middle.
-            // This guarantees GSAP snaps exactly where the user should be reading.
             scentTL.to({}, { duration: 1.5 });
             scentTL.addLabel("snap" + i); 
             scentTL.to({}, { duration: 1.5 });
 
             // 3. EXIT ANIMATIONS
             if (i !== panels.length - 1) {
-                scentTL.to(panel, { opacity: 0, x: -20, duration: 1 });
-                scentTL.to(config.boxId, { opacity: 0, duration: 1 }, "<");
+                scentTL.to(panel, { opacity: 0, x: -20, duration: 1, ease: "sine.inOut" });
+                scentTL.to(config.boxId, { opacity: 0, duration: 1, ease: "sine.inOut" }, "<");
                 if (ingredients.length > 0) {
-                    scentTL.to(ingredients, { opacity: 0, y: "+=200", duration: 1 }, "<");
+                    scentTL.to(ingredients, { opacity: 0, y: "+=150", duration: 1, ease: "sine.in" }, "<");
                 }
             }
         });
