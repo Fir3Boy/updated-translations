@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Easy Oud – Interactive Demonstration</title>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-
     <style>
-        /* =========================================
-           1. CORE LAYOUT & VARIABLES
-        ========================================= */
+        /* 1. CORE LAYOUT & VARIABLES*/
         body {
             display: flex;
             flex-direction: column;
@@ -23,11 +19,9 @@
             color: #f0f0f0;
             overflow-x: hidden;
         }
-
         main {
             flex: 1;
         }
-
         /* --- Global Header --- */
         .main-header {
             display: flex;
@@ -36,16 +30,12 @@
             height: 100px;
             background-color: #d4af37;
         }
-
         .logo-normal {
             height: 75px;
             width: auto;
             animation: simpleFade 2s ease-out forwards;
         }
-
-        /* =========================================
-           2. HERO & TYPOGRAPHY
-        ========================================= */
+        /*2. HERO & TYPOGRAPHY*/
         .hero {
             min-height: 100vh;
             display: flex;
@@ -56,7 +46,6 @@
             padding: 40px 20px;
             box-sizing: border-box;
         }
-
         #product-name {
             font-size: 3rem;
             color: #997c1a;
@@ -65,13 +54,11 @@
             overflow: hidden;
             white-space: nowrap;
         }
-
         #product-name span {
             display: inline-block;
             max-width: 150px;
             animation: shrinkName 1.5s forwards 2s;
         }
-
         .subtitle {
             font-weight: 300;
             opacity: 0.8;
@@ -79,10 +66,7 @@
             text-align: center;
             color: #fffb01;
         }
-
-        /* =========================================
-           3. OUD DEVICE (STICK, BASE, FLAME)
-        ========================================= */
+        /* 3. OUD DEVICE (STICK, BASE, FLAME)*/
         .oud-container {
             opacity: 0;
             visibility: hidden;
@@ -94,7 +78,6 @@
             justify-content: center;
             align-items: flex-end;
         }
-
         .oud-stick {
             width: 40px;
             height: 140px;
@@ -111,7 +94,6 @@
             border: 1px solid rgba(0, 0, 0, 0.3);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
         }
-
         .oud-tip {
             position: absolute;
             top: 0;
@@ -123,7 +105,6 @@
             background-color: #2b1d16;
             z-index: 3;
         }
-
         .oud-base {
             position: absolute;
             bottom: -35px;
@@ -138,7 +119,6 @@
             z-index: 1;
             overflow: hidden;
         }
-
         /* --- Flame Layers --- */
         #main-flame {
             position: absolute;
@@ -153,7 +133,6 @@
             filter: blur(1px);
             z-index: 10;
         }
-
         .flame-outer {
             width: 45px;
             height: 80px;
@@ -161,7 +140,6 @@
             box-shadow: 0 -15px 40px rgba(255, 69, 0, 0.8);
             border-radius: 50% 50% 20% 20% / 80% 80% 20% 20%;
         }
-
         .flame-inner {
             width: 28px;
             height: 55px;
@@ -172,7 +150,6 @@
             transform: translateX(-50%);
             position: absolute;
         }
-
         .flame-core {
             width: 14px;
             height: 30px;
@@ -185,14 +162,10 @@
             transform: translateX(-50%);
             position: absolute;
         }
-
-        /* =========================================
-           4. VISUAL EFFECTS (SMOKE & SVG)
-        ========================================= */
+        /*4. VISUAL EFFECTS (SMOKE & SVG) */
         #luxury-smoke {
             position: absolute;
             bottom: 140px;
-            /* Changed from 82% to sit exactly on the 140px stick */
             left: 50%;
             transform: translateX(-50%);
             width: 120px;
@@ -202,26 +175,20 @@
             opacity: 0;
             z-index: 5;
         }
-
         .smoke-layer {
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
             width: 70px;
-            /* Wider for more density */
             height: 120px;
-            /* Denser gradient for a "thicker" look */
             background: radial-gradient(circle, rgba(230, 230, 230, 0.95) 0%, rgba(180, 180, 180, 0.4) 50%, transparent 80%);
             border-radius: 50%;
             filter: blur(5px);
-            /* Sharper blur makes it look thicker */
         }
-
         .smoke-wisp {
             position: absolute;
             bottom: 140px;
-            /* Changed from 220px to match the stick height */
             left: 50%;
             transform: translateX(-50%);
             width: 6px;
@@ -238,9 +205,7 @@
             transform-origin: bottom center;
         }
 
-        /* =========================================
-           5. UI COMPONENTS (BUTTONS, CARDS, FOOTER)
-        ========================================= */
+        /*5. UI COMPONENTS (BUTTONS, CARDS, FOOTER) */
         .ignite-btn {
             margin-top: 80px;
             padding: 15px 45px;
@@ -254,93 +219,62 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
-
-
         #start-btn {
             autoAlpha: 0;
             visibility: hidden;
         }
-
         .features-section {
             padding: 60px 20px;
             background: #323030;
         }
-
         .features-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            /* Better than flex for many items */
             gap: 30px;
             max-width: 1000px;
-            /* Slightly wider to accommodate more info */
             margin: 0 auto;
         }
-
         .feature-item {
             border-left: 3px solid #d4af37;
             padding: 10px 20px;
             background: rgba(255, 255, 255, 0.03);
-            /* Subtle background lift */
             transition: background 0.3s;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.6s ease-out;
         }
-
         .feature-item.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-
         @media (hover: hover) {
             .feature-item:hover {
                 background: rgba(212, 175, 55, 0.1);
                 transform: translateY(-5px);
             }
         }
-
         .feature-item:active {
             background: rgba(212, 175, 55, 0.2);
             transform: scale(0.97);
-            /* Slight shrink feels like a physical button */
             transition: transform 0.1s;
         }
-
         .feature-item p {
             font-size: 0.95rem;
             line-height: 1.5;
             margin-top: 5px;
             color: #ccc;
         }
-
         .feature-item strong {
             color: #d4af37;
             display: block;
             margin-bottom: 5px;
         }
 
-
-        /* Scents Section */
-        .ingredient-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            /* Behind the box */
-        }
-
-        /* The wrapper determines the total scroll length (e.g., 500% of height) */
+        /* --- SCENTS SECTION STYLES --- */
         #scents-pin-wrapper {
-            height: 500vh;
+            height: 1100vh;
             position: relative;
         }
-
-        /* The stage stays fixed in the viewport */
         .scents-pinned-stage {
             position: sticky;
             top: 0;
@@ -351,41 +285,65 @@
             align-items: center;
             justify-content: center;
             background-color: #1a1a1a;
+            transition: background-color 0.8s ease;
         }
-
-        /* The Box in the middle */
+        
         .scent-showcase-box {
             position: absolute;
             z-index: 10;
-            width: 200px;
-            height: 120px;
-            background: #d4af37;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 250px;
+            height: 350px; 
             border-radius: 8px;
-            font-weight: bold;
-            color: #000;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            background-color: #222; 
         }
 
-        /* The Panels (Hidden initially, we will fade them in with GSAP) */
-        .scent-panel {
-            pointer-events: none;
-            /* Prevents invisible text from blocking clicks */
-            text-align: left;
-            padding: 20px;
-        }
-
-        /* Make the box look a bit more premium in the center */
-        .box-visual {
+        .box-img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0; 
+        }
+
+        #box-cover {
+            opacity: 1;
+            z-index: 11;
+        }
+
+        .ingredient-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .ingredient-group {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1px;
+            height: 1px; 
+        }
+
+        .ingredient-item {
+            position: absolute;
+            top: -30px; 
+            left: -30px;
+            width: 60px;
+            height: 60px;
+            opacity: 0;
+            font-size: 40px; 
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            background: linear-gradient(145deg, #d4af37, #b5942e);
         }
 
         .scents-panels {
@@ -393,54 +351,27 @@
             z-index: 20;
             width: 100%;
             height: 100%;
+            pointer-events: none;
         }
-
         .scent-panel {
             position: absolute;
             top: 50%;
             left: 10%;
-            /* Text on the left, Box in the middle */
             transform: translateY(-50%);
             opacity: 0;
-            /* Start invisible */
-            max-width: 300px;
+            max-width: 320px;
         }
-
-        .scents-section {
-            padding: 100px 20px;
-            background-color: #434343;
-            text-align: center;
+        .scent-panel h2 {
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            color: #d4af37;
         }
-
-        .scents-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 50px;
-            flex-wrap: wrap;
+        .scent-panel p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #eee;
         }
-
-        .scent-card {
-            background: #333;
-            width: 250px;
-            padding: 30px;
-            border-radius: 15px;
-            transition: transform 0.3s;
-            border: 1px solid #444;
-        }
-
-        .scent-card:hover {
-            transform: translateY(-10px);
-            border-color: #d4af37;
-        }
-
-        .color-dot {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-        }
-
 
         /* --- Footer Styling --- */
         footer {
@@ -449,13 +380,11 @@
             text-align: center;
             border-top: 1px solid #d4af37;
         }
-
         .footer-content p {
             font-size: 0.9rem;
             color: #888;
             margin-bottom: 20px;
         }
-
         .footer-links {
             list-style: none;
             padding: 0;
@@ -471,45 +400,22 @@
             font-size: 0.85rem;
             transition: color 0.3s;
         }
-
         .footer-links a:hover {
             color: #fff;
         }
 
-        /* =========================================
-           6. ANIMATIONS & MEDIA QUERIES
-        ========================================= */
+        /* 6. ANIMATIONS & MEDIA QUERIES*/
         @keyframes simpleFade {
-            0% {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
         }
-
         @keyframes shrinkName {
-            0% {
-                opacity: 1;
-                max-width: 150px;
-            }
-
-            100% {
-                opacity: 0;
-                max-width: 0px;
-                margin-right: 0px;
-            }
+            0% { opacity: 1; max-width: 150px; }
+            100% { opacity: 0; max-width: 0px; margin-right: 0px; }
         }
-
         @keyframes crystalShine {
-            100% {
-                transform: translateX(100%);
-            }
+            100% { transform: translateX(100%); }
         }
-
         .oud-base::after {
             content: "";
             position: absolute;
@@ -521,30 +427,28 @@
             transform: translateX(-100%);
             animation: crystalShine 4s infinite;
         }
-
+        @media screen and (max-width: 800px) {
+            .scent-panel {
+                left: 50%;
+                top: 80%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                width: 90%;
+            }
+        }
         @media screen and (max-width: 600px) {
-
-            h1,
-            #product-name {
+            h1, #product-name {
                 font-size: 2.2rem;
             }
-
             .oud-container {
                 height: 250px;
                 transform: scale(1.2);
                 margin: 20px 0;
             }
-
             .ignite-btn {
                 width: 85%;
                 padding: 20px;
             }
-
-            .scents-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-
             .footer-links {
                 flex-direction: column;
                 gap: 20px;
@@ -552,22 +456,17 @@
         }
     </style>
 </head>
-
 <body>
-
     <header class="main-header">
         <img class="logo-normal"
             src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=1600,height=1600,onerror=redirect,format=auto/pQxrOz/mrJXECTLzJM0aRbFOvbpFWbrluaBvxGL1EHSHtgG.png"
             alt="Logo" loading="lazy" />
     </header>
-
     <main>
         <section class="hero">
             <h1 id="product-name">e<span>asy&nbsp;</span>Oud</h1>
             <p class="subtitle">Interactive Demonstration</p>
-
             <button id="reveal-btn" class="ignite-btn">Start The Demonstration</button>
-
             <div class="oud-container">
                 <div id="luxury-smoke">
                     <div class="smoke-layer s-1"></div>
@@ -576,7 +475,6 @@
                 <div class="smoke-wisp w-1"></div>
                 <div class="smoke-wisp w-2"></div>
                 <div class="smoke-wisp w-3"></div>
-
                 <div class="oud-stick">
                     <div class="oud-tip">
                         <div id="main-flame">
@@ -587,7 +485,6 @@
                     </div>
                 </div>
                 <div class="oud-base"></div>
-
                 <svg style="width:0; height:0; position:absolute;">
                     <filter id="wavySmoke">
                         <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="5" seed="1">
@@ -598,9 +495,9 @@
                     </filter>
                 </svg>
             </div>
-
             <button class="ignite-btn" id="start-btn">Ignite</button>
         </section>
+
         <section class="features-section">
             <div class="features-container">
                 <div class="feature-item">
@@ -613,13 +510,12 @@
                 </div>
                 <div class="feature-item">
                     <strong>Burning Time</strong>
-                    <p>A single stick burns for 56+ minutes. One box lasts 2 months with daily use.</p>
+                    <p>A single stick burns for around an hour.</p>
                 </div>
                 <div class="feature-item">
                     <strong>Concentrated Power</strong>
                     <p>1 stick offers the scent strength equivalent to 1 kg of natural agarwood.</p>
                 </div>
-
                 <div class="feature-item">
                     <strong>Air Purification</strong>
                     <p>Purifies the air from germs and unpleasant odors naturally.</p>
@@ -630,8 +526,7 @@
                 </div>
                 <div class="feature-item">
                     <strong>Longevity</strong>
-                    <p>The fragrance lingers much longer than traditional air fresheners, ideal for homes and offices.
-                    </p>
+                    <p>The fragrance lingers much longer than traditional air fresheners.</p>
                 </div>
                 <div class="feature-item">
                     <strong>Versatile Use</strong>
@@ -639,43 +534,76 @@
                 </div>
                 <div class="feature-item">
                     <strong>Artistic Value</strong>
-                    <p>A unique, distinctive scent crafted with historical care and cultural appreciation.</p>
+                    <p>A unique, distinctive scent crafted with historical care.</p>
                 </div>
             </div>
         </section>
 
+        <!-- SCENTS SECTION (10 SCENTS) -->
         <div id="scents-pin-wrapper">
-
             <section class="scents-pinned-stage">
-
-                <div class="scent-bg-overlay"></div>
-
-                <div class="scent-showcase-box">
-                    <div class="box-visual">Eoud</div>
-                    <div class="ingredient-container">
-                        <svg class="ingredient-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-                            style="width: 50px; height: 50px; position: absolute; opacity: 0;">
-                            <path d="M12 22V11M12 11C12 11 15 9 15 6C15 3 12 2 12 2C12 2 9 3 9 6C9 9 12 11 12 11Z"
-                                stroke="#8E7CC3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M12 15C12 15 17 13 17 9C17 5 12 4 12 4M12 15C12 15 7 13 7 9C7 5 12 4 12 4"
-                                stroke="#8E7CC3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                
+                <!-- INGREDIENTS LAYER -->
+                <div class="ingredient-container">
+                    <div class="ingredient-group" id="ing-azraq">
+                        <div class="ingredient-item">🪵</div><div class="ingredient-item">🍂</div><div class="ingredient-item">🪵</div><div class="ingredient-item">✨</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-leather">
+                        <div class="ingredient-item">🪵</div><div class="ingredient-item">👞</div><div class="ingredient-item">🍂</div><div class="ingredient-item">✨</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-ocean">
+                        <div class="ingredient-item">🌊</div><div class="ingredient-item">🐚</div><div class="ingredient-item">🌿</div><div class="ingredient-item">💧</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-royal">
+                        <div class="ingredient-item">👑</div><div class="ingredient-item">🌹</div><div class="ingredient-item">💎</div><div class="ingredient-item">✨</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-taifi">
+                        <div class="ingredient-item">🌹</div><div class="ingredient-item">🌸</div><div class="ingredient-item">🍃</div><div class="ingredient-item">🌹</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-lavender">
+                        <div class="ingredient-item">🪻</div><div class="ingredient-item">🌿</div><div class="ingredient-item">💜</div><div class="ingredient-item">🪻</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-saffron">
+                        <div class="ingredient-item">🌾</div><div class="ingredient-item">✨</div><div class="ingredient-item">🔴</div><div class="ingredient-item">🪵</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-maroki">
+                        <div class="ingredient-item">🪵</div><div class="ingredient-item">🏺</div><div class="ingredient-item">🍂</div><div class="ingredient-item">🪵</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-cuban">
+                        <div class="ingredient-item">🚬</div><div class="ingredient-item">🪵</div><div class="ingredient-item">🥃</div><div class="ingredient-item">🍂</div>
+                    </div>
+                    <div class="ingredient-group" id="ing-kalimantan">
+                        <div class="ingredient-item">🪵</div><div class="ingredient-item">🌴</div><div class="ingredient-item">🛖</div><div class="ingredient-item">✨</div>
                     </div>
                 </div>
 
+                <!-- CENTRAL BOX LAYER -->
+                <div class="scent-showcase-box">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OceanWoodeoud-IncenseSticks-ProductPhoto-_2_1024x1024.png?v=1761769064" id="box-cover" class="box-img" alt="Collection">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OudAzraqeoud-IncenseSticks-ProductPhoto-_1_1024x1024.png?v=1761817674" class="box-img" id="box-azraq">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-LeatherHaileoud-IncenseSticks-ProductPhoto-1_4_1024x1024.png?v=1761733450" class="box-img" id="box-leather">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OceanWoodeoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761769063" class="box-img" id="box-ocean">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-MuskMalakieoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761768982" class="box-img" id="box-royal">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-WardTaifieoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761769175" class="box-img" id="box-taifi">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-LavenderJardineoud-IncenseSticks-ProductPhoto-1_3_1024x1024.jpg?v=1761733339" class="box-img" id="box-lavender">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-ImperialSaffroneoud-IncenseSticks-ProductPhoto-1_4_1024x1024.png?v=1761733033" class="box-img" id="box-saffron">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-DehanOudMarokieoud-IncenseSticks-ProductPhoto-1_4_1024x1024.png?v=1761732941" class="box-img" id="box-maroki">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bakhoor-CubanTobaccoeoud-IncenseSticks-ProductPhoto-1_3_1024x1024.png?v=1761732783" class="box-img" id="box-cuban">
+                    <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OudKalimantaneoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761769238" class="box-img" id="box-kalimantan">
+                </div>
+
+                <!-- TEXT PANELS -->
                 <div class="scents-panels">
-                    <div class="scent-panel" data-scent="leather">
-                        <h2>Leather Hail</h2>
-                        <p>Warm, woody, and sophisticated.</p>
-                    </div>
-                    <div class="scent-panel" data-scent="ocean">
-                        <h2>Ocean Wood</h2>
-                        <p>Fresh breeze meets earthy roots.</p>
-                    </div>
-                    <div class="scent-panel" data-scent="royal">
-                        <h2>Royal Scent</h2>
-                        <p>Deep, majestic, and enduring.</p>
-                    </div>
+                    <div class="scent-panel" data-scent="azraq"><h2>Oud Azraq</h2><p>Deep, woody, and pure agarwood essence.</p></div>
+                    <div class="scent-panel" data-scent="leather"><h2>Leather Hail</h2><p>Warm, woody, and sophisticated leather blend.</p></div>
+                    <div class="scent-panel" data-scent="ocean"><h2>Ocean Wood</h2><p>Fresh breeze meets earthy roots.</p></div>
+                    <div class="scent-panel" data-scent="royal"><h2>Royal Scent</h2><p>Deep, majestic, and enduring musk.</p></div>
+                    <div class="scent-panel" data-scent="taifi"><h2>Ward Taifi</h2><p>The legendary Taif rose, distilled into pure elegance.</p></div>
+                    <div class="scent-panel" data-scent="lavender"><h2>Lavender Jardin</h2><p>A calming walk through a sun-drenched garden.</p></div>
+                    <div class="scent-panel" data-scent="saffron"><h2>Imperial Saffron</h2><p>Rich, spicy, and regal golden saffron.</p></div>
+                    <div class="scent-panel" data-scent="maroki"><h2>Dehan Oud Maroki</h2><p>Authentic Moroccan oud with deep, earthy tones.</p></div>
+                    <div class="scent-panel" data-scent="cuban"><h2>Cuban Tobacco</h2><p>Robust, smoky, and masterfully bold.</p></div>
+                    <div class="scent-panel" data-scent="kalimantan"><h2>Oud Kalimantan</h2><p>Exotic, wild agarwood from the heart of the jungle.</p></div>
                 </div>
 
             </section>
@@ -689,14 +617,13 @@
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
                 <li><a href="https://github.com/Fir3Boy">Contact Us</a></li>
+                <li><a href="https://uksurrati.com/collections/eoud-sticks">Order Now</a></li>
             </ul>
         </div>
     </footer>
 
     <script>
-        /* =========================================
-           1. INITIALIZATION & SELECTORS
-        ========================================= */
+        /* --- 1. DEVICE ANIMATION LOGIC --- */
         const revealBtn = document.querySelector("#reveal-btn");
         const startBtn = document.querySelector("#start-btn");
         const mainDevice = document.querySelector(".oud-container");
@@ -705,13 +632,9 @@
         const oudTip = document.querySelector(".oud-tip");
         const smokeContainer = document.querySelector("#luxury-smoke");
         const subtitle = document.querySelector(".subtitle");
-
-        let state = 0; // 0: Idle, 1: Burning, 2: Smoking
+        let state = 0; 
         let flameTween, pulseTween, smokeTweens = [];
 
-        /* =========================================
-           2. UTILITY FUNCTIONS
-        ========================================= */
         function updateSubtitle(newText) {
             gsap.to(subtitle, {
                 opacity: 0, y: -10, duration: 0.4,
@@ -722,213 +645,178 @@
             });
         }
 
-        /* =========================================
-           3. CORE ANIMATION LOGIC
-        ========================================= */
-
-        // --- Intro Sequence ---
         revealBtn.addEventListener("click", () => {
             gsap.timeline()
                 .to(revealBtn, { opacity: 0, y: -20, duration: 0.5, onComplete: () => revealBtn.style.display = "none" })
                 .to([mainDevice, startBtn], { autoAlpha: 1, y: 0, duration: 1, stagger: 0.2, ease: "back.out(1.7)" });
         });
 
-        // --- Interaction Controller ---
         startBtn.addEventListener("click", () => {
-            if (gsap.isTweening(stick)) return; // Lock interaction during flip
-
+            if (gsap.isTweening(stick)) return; 
             if (state === 0) handleIgnition();
             else if (state === 1) handleBlow();
             else if (state === 2) handleReset();
         });
 
-        /* --- STATE 1: IGNITION --- */
         function handleIgnition() {
             state = 1;
             startBtn.innerText = "Wait for 30 seconds...";
             updateSubtitle("Let the tip catch fire evenly");
-
             if (pulseTween) pulseTween.kill();
             gsap.killTweensOf([flame, oudTip]);
             gsap.set(flame, { scale: 0, autoAlpha: 0 });
             gsap.set(oudTip, { backgroundColor: "#2b1d16", boxShadow: "none" });
-
             const tl = gsap.timeline();
             tl.to(startBtn, { pointerEvents: "none", opacity: 0.8, duration: 0.1 })
                 .to(flame, { autoAlpha: 1, scale: 1.1, duration: 0.8, ease: "back.out(1.7)", overwrite: "auto" })
-                .add(() => {
-                    flameTween = gsap.to(".flame-outer", { scaleY: 1.1, scaleX: 0.9, duration: 0.1, yoyo: true, repeat: -1 });
-                })
+                .add(() => { flameTween = gsap.to(".flame-outer", { scaleY: 1.1, scaleX: 0.9, duration: 0.1, yoyo: true, repeat: -1 }); })
                 .fromTo(startBtn,
                     { background: "linear-gradient(90deg, #d4af37 0%, transparent 0%)" },
                     { background: "linear-gradient(90deg, #d4af37 100%, transparent 100%)", duration: 3, ease: "none" }
                 )
-                .to(startBtn, {
-                    pointerEvents: "auto", opacity: 1, background: "transparent",
-                    onStart: () => { startBtn.innerText = "Blow"; }
-                });
+                .to(startBtn, { pointerEvents: "auto", opacity: 1, background: "transparent", onStart: () => { startBtn.innerText = "Blow"; } });
         }
-        /* --- STATE 2: SMOKE & EMBER --- */
+
         function handleBlow() {
             state = 2;
             startBtn.innerText = "Extinguish";
             updateSubtitle("Let it burn for 20 to 30 minute");
-
             if (flameTween) flameTween.kill();
             gsap.to(flame, { scale: 0, autoAlpha: 0, duration: 0.4, overwrite: "auto" });
-
             pulseTween = gsap.fromTo(oudTip,
                 { backgroundColor: "#2b1d16", boxShadow: "0 0 0px rgba(0,0,0,0)" },
                 { backgroundColor: "#ff4500", boxShadow: "0 -8px 40px 12px rgba(255, 69, 0, 0.7)", duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" }
             );
-
             gsap.to(smokeContainer, { opacity: 1, duration: 1 });
-
-            // 1. Regular Smoke Layers
+            
             document.querySelectorAll(".smoke-layer").forEach((layer, i) => {
                 smokeTweens.push(gsap.fromTo(layer,
                     { y: 0, opacity: 0, scale: 1.5 },
                     { y: -350, x: "random(-15, 15)", opacity: 0.8, scale: 6, duration: 4 + i, repeat: -1, delay: i * 0.4, ease: "power1.out" }
                 ));
             });
-
-            // 2. Cigarette-style Smoke Wisps (Tails)
             document.querySelectorAll(".smoke-wisp").forEach((wisp, i) => {
-                // Reset position
                 gsap.set(wisp, { opacity: 0, scaleY: 0, xPercent: -50, x: 0 });
-
                 smokeTweens.push(gsap.fromTo(wisp,
-                    {
-                        scaleY: 0,
-                        opacity: 0,
-                        y: 0
-                    },
-                    {
-                        scaleY: 2.5,
-                        opacity: 0.7,
-                        y: -250, // Moves up while stretching
-                        duration: 5 + (i * 1),
-                        repeat: -1,
-                        delay: i * 1.5,
-                        ease: "power1.out",
-                        onRepeat: () => {
-                            // Randomize horizontal drift each time it loops
-                            gsap.to(wisp, {
-                                x: gsap.utils.random(-30, 30),
-                                duration: 4,
-                                ease: "sine.inOut"
-                            });
-                        }
+                    { scaleY: 0, opacity: 0, y: 0 },
+                    { scaleY: 2.5, opacity: 0.7, y: -250, duration: 5 + (i * 1), repeat: -1, delay: i * 1.5, ease: "power1.out",
+                      onRepeat: () => { gsap.to(wisp, { x: gsap.utils.random(-30, 30), duration: 4, ease: "sine.inOut" }); }
                     }
                 ));
-
-                // The "Wiggle" - This makes the tail wave side-to-side as it rises
-                smokeTweens.push(gsap.to(wisp, {
-                    rotation: i % 2 === 0 ? 5 : -5,
-                    duration: 2,
-                    repeat: -1,
-                    yoyo: true,
-                    ease: "sine.inOut"
-                }));
+                smokeTweens.push(gsap.to(wisp, { rotation: i % 2 === 0 ? 5 : -5, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" }));
             });
         }
 
-        /* --- STATE 3: FLIP & RESET --- */
         function handleReset() {
             state = 0;
             startBtn.innerText = "Flipping...";
             updateSubtitle("The scent is expected to last for approximately a day.");
             startBtn.style.pointerEvents = "none";
-
             if (pulseTween) pulseTween.kill();
-
             const flipTL = gsap.timeline({
                 onComplete: () => {
                     startBtn.innerText = "Ignite";
                     startBtn.style.pointerEvents = "auto";
                     gsap.set(stick, { rotation: 0 });
                     gsap.set(oudTip, { backgroundColor: "#2b1d16", boxShadow: "none", clearProps: "all" });
-
                     smokeTweens.forEach(t => t.kill());
                     smokeTweens = [];
                     gsap.to([".smoke-layer", ".smoke-wisp", smokeContainer], { opacity: 0, duration: 0.5 });
                 }
             });
-
             flipTL.to(stick, { y: -120, duration: 0.8, ease: "power2.inOut" })
                 .to(stick, { rotation: "+=180", duration: 1, ease: "sine.inOut" }, "-=0.4")
                 .to(stick, { y: 0, duration: 0.8, ease: "power2.inOut" }, "-=0.2")
                 .to(oudTip, { backgroundColor: "#2b1d16", boxShadow: "none", duration: 1 }, 0);
         }
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('is-visible');
             });
         }, { threshold: 0.1 });
-
         document.querySelectorAll('.feature-item').forEach(item => observer.observe(item));
-        /* --- SCENT ANIMATION --- */
+
+
+        /* --- 2. UPDATED SCENT SCROLL ANIMATION (10 SCENTS) --- */
         gsap.registerPlugin(ScrollTrigger);
-        // 1. Create the Master Timeline
+        
         const scentTL = gsap.timeline({
             scrollTrigger: {
                 trigger: "#scents-pin-wrapper",
-                start: "top top",      // Start when the top of wrapper hits top of screen
-                end: "bottom bottom",  // End when we finish the 500vh scroll
-                scrub: 1,              // Smoothly links animation to scroll
-
+                start: "top top",      
+                end: "bottom bottom",  
+                scrub: 1,
+                snap: {
+                    snapTo: "labels", 
+                    duration: { min: 0.2, max: 0.8 },
+                    delay: 0.1, 
+                    ease: "power1.inOut"
+                }              
             }
         });
 
-        // 2. Define our scent data (Easy to edit/add more here!)
+        scentTL.set("#box-cover", { opacity: 1 });
+
         const scentConfigs = [
-            { id: 'leather', color: '#4a2c16' },
-            { id: 'ocean', color: '#163a4a' },
-            { id: 'royal', color: '#3a164a' }
+            { id: 'azraq', color: '#1f130a', boxId: '#box-azraq', ingGroup: '#ing-azraq' },
+            { id: 'leather', color: '#1f130a', boxId: '#box-leather', ingGroup: '#ing-leather' },
+            { id: 'ocean',   color: '#0a1a24', boxId: '#box-ocean',   ingGroup: '#ing-ocean' },
+            { id: 'royal',   color: '#1d0b24', boxId: '#box-royal',   ingGroup: '#ing-royal' },
+            { id: 'taifi',   color: '#2e0a15', boxId: '#box-taifi',   ingGroup: '#ing-taifi' },
+            { id: 'lavender',color: '#120a2e', boxId: '#box-lavender',ingGroup: '#ing-lavender' },
+            { id: 'saffron', color: '#2e190a', boxId: '#box-saffron', ingGroup: '#ing-saffron' },
+            { id: 'maroki',  color: '#1c1c11', boxId: '#box-maroki',  ingGroup: '#ing-maroki' },
+            { id: 'cuban',   color: '#1a1005', boxId: '#box-cuban',   ingGroup: '#ing-cuban' },
+            { id: 'kalimantan', color: '#0a1a0f', boxId: '#box-kalimantan', ingGroup: '#ing-kalimantan' }
         ];
 
-        // 3. Loop through each panel to build the scroll story
         const panels = gsap.utils.toArray(".scent-panel");
 
         panels.forEach((panel, i) => {
-            const config = scentConfigs[i] || { color: '#333' };
+            const config = scentConfigs[i];
+            const ingredients = gsap.utils.toArray(`${config.ingGroup} .ingredient-item`);
 
-            // A. Fade In & Background Change
-            scentTL.to(".scents-pinned-stage", {
-                backgroundColor: config.color,
-                duration: 1
-            })
-                .to(panel, {
-                    opacity: 1,
-                    x: 20,
-                    duration: 1
-                }, "-=1") // Overlap with background change
-
-                // B. Hold (Stay visible for a bit while scrolling)
-                .to({}, { duration: 2 })
-
-            // C. Fade Out (Unless it's the last one)
-            if (i !== panels.length - 1) {
-                scentTL.to(panel, {
-                    opacity: 0,
-                    x: -20,
-                    duration: 1
-                });
+            // 1. ENTER ANIMATIONS
+            // Use "<" to sync these animations relative to the start of this block
+            scentTL.to(".scents-pinned-stage", { backgroundColor: config.color, duration: 1 });
+            
+            if (i === 0) {
+                scentTL.to("#box-cover", { opacity: 0, duration: 0.5 }, "<");
             }
-            scentTL.to(".ingredient-svg", {
-                opacity: 1,
-                x: (i) => (Math.random() - 0.5) * 400, // Random spread left/right
-                y: (i) => (Math.random() - 0.5) * 400, // Random spread up/down
-                rotation: "random(-45, 45)",
-                scale: "random(1, 1.5)",
-                duration: 1.5,
-                ease: "power2.out",
-                stagger: 0.1
-            }, "-=1"); // Start as the panel fades in
+            
+            scentTL.to(panel, { opacity: 1, x: 20, duration: 1 }, "<");
+            scentTL.to(config.boxId, { opacity: 1, duration: 1 }, "<");
+
+            if (ingredients.length > 0) {
+                scentTL.to(ingredients, {
+                    opacity: 1,
+                    x: () => (Math.random() - 0.5) * 600, 
+                    y: () => (Math.random() - 0.5) * 600,
+                    rotation: () => Math.random() * 720,
+                    scale: () => 0.8 + Math.random(), 
+                    duration: 1.5,
+                    ease: "back.out(1.2)", 
+                    stagger: 0.05
+                }, "<");
+            }
+
+            // 2. PAUSE & SNAP POINT 
+            // We split the pause in half and put our ONLY label exactly in the middle.
+            // This guarantees GSAP snaps exactly where the user should be reading.
+            scentTL.to({}, { duration: 1.5 });
+            scentTL.addLabel("snap" + i); 
+            scentTL.to({}, { duration: 1.5 });
+
+            // 3. EXIT ANIMATIONS
+            if (i !== panels.length - 1) {
+                scentTL.to(panel, { opacity: 0, x: -20, duration: 1 });
+                scentTL.to(config.boxId, { opacity: 0, duration: 1 }, "<");
+                if (ingredients.length > 0) {
+                    scentTL.to(ingredients, { opacity: 0, y: "+=200", duration: 1 }, "<");
+                }
+            }
         });
     </script>
 </body>
-
 </html>
