@@ -66,7 +66,7 @@
             text-align: center;
             color: #fffb01;
         }
-        /* 3. OUD DEVICE (STICK, BASE, FLAME)*/
+        /* 3. OUD DEVICE */
         .oud-container {
             opacity: 0;
             visibility: hidden;
@@ -119,7 +119,7 @@
             z-index: 1;
             overflow: hidden;
         }
-        /* --- Flame Layers --- */
+        /* Flame Layers */
         #main-flame {
             position: absolute;
             bottom: 100%;
@@ -162,7 +162,7 @@
             transform: translateX(-50%);
             position: absolute;
         }
-        /*4. VISUAL EFFECTS (SMOKE & SVG) */
+        /* Smoke SVG Effects */
         #luxury-smoke {
             position: absolute;
             bottom: 140px;
@@ -205,7 +205,7 @@
             transform-origin: bottom center;
         }
 
-        /*5. UI COMPONENTS (BUTTONS, CARDS, FOOTER) */
+        /* 5. UI COMPONENTS */
         .ignite-btn {
             margin-top: 80px;
             padding: 15px 45px;
@@ -247,7 +247,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-        @media (hover: hover) {
+                @media (hover: hover) {
             .feature-item:hover {
                 background: rgba(212, 175, 55, 0.1);
                 transform: translateY(-5px);
@@ -270,7 +270,9 @@
             margin-bottom: 5px;
         }
 
-        /* --- SCENTS SECTION STYLES --- */
+        /* --- UPDATED SCENTS SECTION STYLES --- 
+           Using Vertical Flow & Absolute Locking
+        */
         #scents-pin-wrapper {
             height: 1100vh;
             position: relative;
@@ -282,6 +284,7 @@
             width: 100%;
             overflow: hidden;
             display: flex;
+            flex-direction: column; /* VERTICAL FLOW: Title -> Box -> Desc */
             align-items: center;
             justify-content: center;
             background-color: #1a1a1a;
@@ -289,21 +292,21 @@
         }
         
         .scent-showcase-box {
-            position: absolute;
+            position: relative; /* STABLE LAYOUT in flex flow */
             z-index: 10;
-            width: 320px; /* Slightly wider */
-            height: 320px; /* Square container for consistent Contain fitting */
+            width: 320px;
+            height: 320px;
             display: flex;
             align-items: center;
             justify-content: center;
             pointer-events: none;
+            margin: 20px 0;
         }
 
         .box-img {
             position: absolute;
             max-width: 100%;
             max-height: 100%;
-            /* Use contain to ensure the whole box image is visible without cropping */
             object-fit: contain; 
             opacity: 0; 
             filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
@@ -312,6 +315,48 @@
         #box-cover {
             opacity: 1;
             z-index: 11;
+        }
+
+        .scents-panels {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
+        }
+        .scent-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        /* ABSOLUTE LOCKING: Title at top 10%, Description at bottom 10% */
+        .scent-panel h2 {
+            position: absolute;
+            top: 10%; 
+            font-size: 2.8rem;
+            margin: 0;
+            color: #d4af37;
+            width: 90%;
+        }
+        .scent-panel p {
+            position: absolute;
+            bottom: 10%;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #eee;
+            max-width: 450px;
+            width: 90%;
         }
 
         .ingredient-container {
@@ -324,53 +369,19 @@
             pointer-events: none;
             z-index: 5;
         }
-
         .ingredient-group {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 1px;
-            height: 1px; 
+            width: 1px; height: 1px; 
         }
-
         .ingredient-item {
             position: absolute;
-            top: -30px; 
-            left: -30px;
-            width: 60px;
-            height: 60px;
+            top: -30px; left: -30px;
+            width: 60px; height: 60px;
             opacity: 0;
             font-size: 40px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .scents-panels {
-            position: relative;
-            z-index: 20;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .scent-panel {
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            transform: translateY(-50%);
-            opacity: 0;
-            max-width: 320px;
-        }
-        .scent-panel h2 {
-            font-size: 2.5rem;
-            margin: 0 0 10px 0;
-            color: #d4af37;
-        }
-        .scent-panel p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin: 0;
-            color: #eee;
+            display: flex; align-items: center; justify-content: center;
         }
 
         /* --- Footer Styling --- */
@@ -380,39 +391,14 @@
             text-align: center;
             border-top: 1px solid #d4af37;
         }
-        .footer-content p {
-            font-size: 0.9rem;
-            color: #888;
-            margin-bottom: 20px;
-        }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin: 0;
-        }
+        .footer-content p { font-size: 0.9rem; color: #888; margin-bottom: 20px; }
+        .footer-links { list-style: none; padding: 0; display: flex; justify-content: center; gap: 30px; margin: 0; }
+        .footer-links a { color: #d4af37; text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
+        .footer-links a:hover { color: #fff; }
 
-        .footer-links a {
-            color: #d4af37;
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover {
-            color: #fff;
-        }
-
-        /* 6. ANIMATIONS & MEDIA QUERIES*/
-        @keyframes simpleFade {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes shrinkName {
-            0% { opacity: 1; max-width: 150px; }
-            100% { opacity: 0; max-width: 0px; margin-right: 0px; }
-        }
+        /* 6. ANIMATIONS & RESPONSIVE SPACING */
+        @keyframes simpleFade { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes shrinkName { 0% { opacity: 1; max-width: 150px; } 100% { opacity: 0; max-width: 0px; margin-right: 0px; } }
         @keyframes crystalShine {
             100% { transform: translateX(100%); }
         }
@@ -441,31 +427,19 @@
                 top: 40%;
             }
         }
+        
         @media screen and (max-width: 600px) {
-            h1, #product-name {
-                font-size: 2.2rem;
-            }
-            .oud-container {
-                height: 250px;
-                transform: scale(1.2);
-                margin: 20px 0;
-            }
-            .ignite-btn {
-                width: 85%;
-                padding: 20px;
-            }
-            .footer-links {
-                flex-direction: column;
-                gap: 20px;
-            }
+            h1, #product-name { font-size: 2.2rem; }
+            .scent-showcase-box { width: 260px; height: 260px; }
+            .scent-panel h2 { font-size: 2rem; top: 12%; }
+            .scent-panel p { font-size: 1rem; bottom: 12%; }
+            .ignite-btn { width: 85%; padding: 20px; }
         }
     </style>
 </head>
 <body>
     <header class="main-header">
-        <img class="logo-normal"
-            src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=1600,height=1600,onerror=redirect,format=auto/pQxrOz/mrJXECTLzJM0aRbFOvbpFWbrluaBvxGL1EHSHtgG.png"
-            alt="Logo" loading="lazy" />
+        <img class="logo-normal" src="https://cdn.salla.sa/cdn-cgi/image/fit=scale-down,width=1600,height=1600,onerror=redirect,format=auto/pQxrOz/mrJXECTLzJM0aRbFOvbpFWbrluaBvxGL1EHSHtgG.png" alt="Logo" />
     </header>
     <main>
         <section class="hero">
@@ -493,14 +467,13 @@
                 <svg style="width:0; height:0; position:absolute;">
                     <filter id="wavySmoke">
                         <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="5" seed="1">
-                            <animate attributeName="baseFrequency" dur="10s" values="0.01;0.02;0.01"
-                                repeatCount="indefinite" />
+                            <animate attributeName="baseFrequency" dur="10s" values="0.01;0.02;0.01" repeatCount="indefinite" />
                         </feTurbulence>
                         <feDisplacementMap in="SourceGraphic" scale="25" />
                     </filter>
                 </svg>
             </div>
-            <button class="ignite-btn" id="start-btn">Ignite</button>
+            <button class="ignite-btn" id="start-btn" style="visibility:hidden">Ignite</button>
         </section>
 
         <section class="features-section">
@@ -517,7 +490,7 @@
                     <strong>Burning Time</strong>
                     <p>A single stick burns for around an hour.</p>
                 </div>
-                <div class="feature-item">
+                  <div class="feature-item">
                     <strong>Concentrated Power</strong>
                     <p>1 stick offers the scent strength equivalent to 1 kg of natural agarwood.</p>
                 </div>
@@ -544,45 +517,25 @@
             </div>
         </section>
 
-        <!-- SCENTS SECTION (10 SCENTS) -->
+        <!-- SCENTS SECTION -->
         <div id="scents-pin-wrapper">
             <section class="scents-pinned-stage">
                 
                 <!-- INGREDIENTS LAYER -->
                 <div class="ingredient-container">
-                    <div class="ingredient-group" id="ing-azraq">
-                        <div class="ingredient-item">🪵</div><div class="ingredient-item">🍂</div><div class="ingredient-item">🪵</div><div class="ingredient-item">✨</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-leather">
-                        <div class="ingredient-item">🪵</div><div class="ingredient-item">👞</div><div class="ingredient-item">🍂</div><div class="ingredient-item">✨</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-ocean">
-                        <div class="ingredient-item">🌊</div><div class="ingredient-item">🐚</div><div class="ingredient-item">🌿</div><div class="ingredient-item">💧</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-royal">
-                        <div class="ingredient-item">👑</div><div class="ingredient-item">🌹</div><div class="ingredient-item">💎</div><div class="ingredient-item">✨</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-taifi">
-                        <div class="ingredient-item">🌹</div><div class="ingredient-item">🌸</div><div class="ingredient-item">🍃</div><div class="ingredient-item">🌹</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-lavender">
-                        <div class="ingredient-item">🪻</div><div class="ingredient-item">🌿</div><div class="ingredient-item">💜</div><div class="ingredient-item">🪻</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-saffron">
-                        <div class="ingredient-item">🌾</div><div class="ingredient-item">✨</div><div class="ingredient-item">🔴</div><div class="ingredient-item">🪵</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-maroki">
-                        <div class="ingredient-item">🪵</div><div class="ingredient-item">🏺</div><div class="ingredient-item">🍂</div><div class="ingredient-item">🪵</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-cuban">
-                        <div class="ingredient-item">🚬</div><div class="ingredient-item">🪵</div><div class="ingredient-item">🥃</div><div class="ingredient-item">🍂</div>
-                    </div>
-                    <div class="ingredient-group" id="ing-kalimantan">
-                        <div class="ingredient-item">🪵</div><div class="ingredient-item">🌴</div><div class="ingredient-item">🛖</div><div class="ingredient-item">✨</div>
-                    </div>
+                    <div class="ingredient-group" id="ing-azraq"><div class="ingredient-item">🪵</div><div class="ingredient-item">✨</div></div>
+                    <div class="ingredient-group" id="ing-leather"><div class="ingredient-item">👞</div><div class="ingredient-item">🍂</div></div>
+                    <div class="ingredient-group" id="ing-ocean"><div class="ingredient-item">🌊</div><div class="ingredient-item">💧</div></div>
+                    <div class="ingredient-group" id="ing-royal"><div class="ingredient-item">👑</div><div class="ingredient-item">💎</div></div>
+                    <div class="ingredient-group" id="ing-taifi"><div class="ingredient-item">🌹</div><div class="ingredient-item">🌸</div></div>
+                    <div class="ingredient-group" id="ing-lavender"><div class="ingredient-item">🪻</div><div class="ingredient-item">🌿</div></div>
+                    <div class="ingredient-group" id="ing-saffron"><div class="ingredient-item">🌾</div><div class="ingredient-item">🔴</div></div>
+                    <div class="ingredient-group" id="ing-maroki"><div class="ingredient-item">🪵</div><div class="ingredient-item">🏺</div></div>
+                    <div class="ingredient-group" id="ing-cuban"><div class="ingredient-item">🚬</div><div class="ingredient-item">🥃</div></div>
+                    <div class="ingredient-group" id="ing-kalimantan"><div class="ingredient-item">🌴</div><div class="ingredient-item">🛖</div></div>
                 </div>
 
-                <!-- CENTRAL BOX LAYER -->
+                <!-- CENTRAL BOX (Locked in middle of flex flow) -->
                 <div class="scent-showcase-box">
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OceanWoodeoud-IncenseSticks-ProductPhoto-_2_1024x1024.png?v=1761769064" id="box-cover" class="box-img" alt="Collection">
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OudAzraqeoud-IncenseSticks-ProductPhoto-_1_1024x1024.png?v=1761817674" class="box-img" id="box-azraq">
@@ -597,18 +550,18 @@
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OudKalimantaneoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761769238" class="box-img" id="box-kalimantan">
                 </div>
 
-                <!-- TEXT PANELS -->
+                <!-- TEXT PANELS (Absolute locked text) -->
                 <div class="scents-panels">
-                    <div class="scent-panel" data-scent="azraq"><h2>Oud Azraq</h2><p>Deep, woody, and pure agarwood essence.</p></div>
-                    <div class="scent-panel" data-scent="leather"><h2>Leather Hail</h2><p>Warm, woody, and sophisticated leather blend.</p></div>
-                    <div class="scent-panel" data-scent="ocean"><h2>Ocean Wood</h2><p>Fresh breeze meets earthy roots.</p></div>
-                    <div class="scent-panel" data-scent="royal"><h2>Royal Scent</h2><p>Deep, majestic, and enduring musk.</p></div>
-                    <div class="scent-panel" data-scent="taifi"><h2>Ward Taifi</h2><p>The legendary Taif rose, distilled into pure elegance.</p></div>
-                    <div class="scent-panel" data-scent="lavender"><h2>Lavender Jardin</h2><p>A calming walk through a sun-drenched garden.</p></div>
-                    <div class="scent-panel" data-scent="saffron"><h2>Imperial Saffron</h2><p>Rich, spicy, and regal golden saffron.</p></div>
-                    <div class="scent-panel" data-scent="maroki"><h2>Dehan Oud Maroki</h2><p>Authentic Moroccan oud with deep, earthy tones.</p></div>
-                    <div class="scent-panel" data-scent="cuban"><h2>Cuban Tobacco</h2><p>Robust, smoky, and masterfully bold.</p></div>
-                    <div class="scent-panel" data-scent="kalimantan"><h2>Oud Kalimantan</h2><p>Exotic, wild agarwood from the heart of the jungle.</p></div>
+                    <div class="scent-panel" id="panel-azraq"><h2>Oud Azraq</h2><p>Deep, woody, and pure agarwood essence.</p></div>
+                    <div class="scent-panel" id="panel-leather"><h2>Leather Hail</h2><p>Warm, woody, and sophisticated leather blend.</p></div>
+                    <div class="scent-panel" id="panel-ocean"><h2>Ocean Wood</h2><p>Fresh breeze meets earthy roots.</p></div>
+                    <div class="scent-panel" id="panel-royal"><h2>Royal Scent</h2><p>Deep, majestic, and enduring musk.</p></div>
+                    <div class="scent-panel" id="panel-taifi"><h2>Ward Taifi</h2><p>The legendary Taif rose distilled.</p></div>
+                    <div class="scent-panel" id="panel-lavender"><h2>Lavender Jardin</h2><p>A calming walk through a sun-drenched garden.</p></div>
+                    <div class="scent-panel" id="panel-saffron"><h2>Imperial Saffron</h2><p>Rich, spicy, and regal golden saffron.</p></div>
+                    <div class="scent-panel" id="panel-maroki"><h2>Dehan Oud Maroki</h2><p>Authentic Moroccan oud with deep tones.</p></div>
+                    <div class="scent-panel" id="panel-cuban"><h2>Cuban Tobacco</h2><p>Robust, smoky, and masterfully bold.</p></div>
+                    <div class="scent-panel" id="panel-kalimantan"><h2>Oud Kalimantan</h2><p>Exotic wild agarwood from the jungle.</p></div>
                 </div>
 
             </section>
@@ -627,7 +580,7 @@
         </div>
     </footer>
 
-    <script>
+      <script>
         /* --- 1. DEVICE ANIMATION LOGIC --- */
         const revealBtn = document.querySelector("#reveal-btn");
         const startBtn = document.querySelector("#start-btn");
@@ -749,76 +702,50 @@
         const scentTL = gsap.timeline({
             scrollTrigger: {
                 trigger: "#scents-pin-wrapper",
-                start: "top top",      
-                end: "bottom bottom",  
+                start: "top top",
+                end: "bottom bottom",
                 scrub: 1,
-                snap: {
-                    snapTo: "labels", 
-                    duration: { min: 0.4, max: 1.2 }, 
-                    delay: 0.1, 
-                    ease: "power4.inOut" 
-                }              
+                snap: "labels"
             }
         });
 
-        scentTL.set("#box-cover", { opacity: 1 });
-
-        const scentConfigs = [
-            { id: 'azraq', color: '#001a33', boxId: '#box-azraq', ingGroup: '#ing-azraq' },
-            { id: 'leather', color: '#0a2e14', boxId: '#box-leather', ingGroup: '#ing-leather' },
-            { id: 'ocean', color: '#9acaff', boxId: '#box-ocean', ingGroup: '#ing-ocean' },
-            { id: 'royal', color: '#a57c00', boxId: '#box-royal', ingGroup: '#ing-royal' },
-            { id: 'taifi', color: '#e57399', boxId: '#box-taifi', ingGroup: '#ing-taifi' },
-            { id: 'lavender', color: '#4b0082', boxId: '#box-lavender', ingGroup: '#ing-lavender' },
-            { id: 'saffron', color: '#ccb899', boxId: '#box-saffron', ingGroup: '#ing-saffron' },
-            { id: 'maroki', color: '#4a0404', boxId: '#box-maroki', ingGroup: '#ing-maroki' },
-            { id: 'cuban', color: '#4e342e', boxId: '#box-cuban', ingGroup: '#ing-cuban' },
-            { id: 'kalimantan', color: '#1a1a1a', boxId: '#box-kalimantan', ingGroup: '#ing-kalimantan' }
+        const configs = [
+            { id: 'azraq', color: '#001a33' }, { id: 'leather', color: '#0a2e14' },
+            { id: 'ocean', color: '#003366' }, { id: 'royal', color: '#5e4900' },
+            { id: 'taifi', color: '#7a1b3c' }, { id: 'lavender', color: '#330066' },
+            { id: 'saffron', color: '#8b4513' }, { id: 'maroki', color: '#4a0404' },
+            { id: 'cuban', color: '#3e2723' }, { id: 'kalimantan', color: '#1a1a1a' }
         ];
 
-        const panels = gsap.utils.toArray(".scent-panel");
+        configs.forEach((cfg, i) => {
+            const panel = `#panel-${cfg.id}`;
+            const box = `#box-${cfg.id}`;
+            const ings = `#ing-${cfg.id} .ingredient-item`;
 
-        panels.forEach((panel, i) => {
-            const config = scentConfigs[i];
-            const ingredients = gsap.utils.toArray(`${config.ingGroup} .ingredient-item`);
+            scentTL.to(".scents-pinned-stage", { backgroundColor: cfg.color, duration: 1 }, i === 0 ? undefined : "<");
+            if (i === 0) scentTL.to("#box-cover", { opacity: 0, duration: 0.5 }, "<");
 
-            // 1. ENTER ANIMATIONS
-            scentTL.to(".scents-pinned-stage", { backgroundColor: config.color, duration: 1, ease: "sine.inOut" });
-            
-            if (i === 0) {
-                scentTL.to("#box-cover", { opacity: 0, duration: 0.8, ease: "sine.inOut" }, "<");
-            }
-            
-            scentTL.to(panel, { opacity: 1, x: 20, duration: 1, ease: "sine.inOut" }, "<");
-            scentTL.to(config.boxId, { opacity: 1, duration: 1, ease: "sine.inOut" }, "<");
+            scentTL.to(panel, { opacity: 1, duration: 1 }, "<");
+            scentTL.to(box, { opacity: 1, duration: 1 }, "<");
 
-            if (ingredients.length > 0) {
-                scentTL.to(ingredients, {
-                    opacity: 1,
-                    x: () => (Math.random() - 0.5) * 600, 
-                    y: () => (Math.random() - 0.5) * 600,
-                    rotation: () => Math.random() * 720,
-                    scale: () => 0.8 + Math.random(), 
-                    duration: 1.8,
-                    ease: "sine.out", 
-                    stagger: 0.05
-                }, "<");
-            }
+            scentTL.to(ings, {
+                opacity: 1,
+                x: () => (Math.random() - 0.5) * 600,
+                y: () => (Math.random() - 0.5) * 600,
+                rotation: 360,
+                duration: 2
+            }, "<");
 
-            // 2. PAUSE & SNAP POINT 
-            scentTL.to({}, { duration: 1.5 });
-            scentTL.addLabel("snap" + i); 
+            scentTL.addLabel("snap" + i);
             scentTL.to({}, { duration: 1.5 });
 
-            // 3. EXIT ANIMATIONS
-            if (i !== panels.length - 1) {
-                scentTL.to(panel, { opacity: 0, x: -20, duration: 1, ease: "sine.inOut" });
-                scentTL.to(config.boxId, { opacity: 0, duration: 1, ease: "sine.inOut" }, "<");
-                if (ingredients.length > 0) {
-                    scentTL.to(ingredients, { opacity: 0, y: "+=150", duration: 1, ease: "sine.in" }, "<");
-                }
+            if (i < configs.length - 1) {
+                scentTL.to([panel, box, ings], { opacity: 0, duration: 1 });
             }
         });
+
+        // Intersection Observer for feature cards
+        document.querySelectorAll('.feature-item').forEach(i => observer.observe(i));
     </script>
 </body>
 </html>
