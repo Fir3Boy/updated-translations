@@ -325,19 +325,31 @@
             pointer-events: none;
             z-index: 5;
         }
-        .ingredient-group {
+.ingredient-group {
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 1px; height: 1px; 
+            width: 100%;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
+
         .ingredient-item {
             position: absolute;
-            top: -30px; left: -30px;
-            width: 60px; height: 60px;
+            width: 80px;  /* Larger for SVGs */
+            height: 80px;
             opacity: 0;
-            font-size: 40px; 
-            display: flex; align-items: center; justify-content: center;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+            transition: transform 0.3s ease-out;
+        }
+
+        .ingredient-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* 3. FLEXBOX FOR THE TEXT PANELS */
@@ -517,16 +529,73 @@
             <section class="scents-pinned-stage">
                 
                 <div class="ingredient-container">
-                    <div class="ingredient-group" id="ing-azraq"><div class="ingredient-item">🪵</div><div class="ingredient-item">✨</div></div>
-                    <div class="ingredient-group" id="ing-leather"><div class="ingredient-item">👞</div><div class="ingredient-item">🍂</div></div>
-                    <div class="ingredient-group" id="ing-ocean"><div class="ingredient-item">🌊</div><div class="ingredient-item">💧</div></div>
-                    <div class="ingredient-group" id="ing-royal"><div class="ingredient-item">👑</div><div class="ingredient-item">💎</div></div>
-                    <div class="ingredient-group" id="ing-taifi"><div class="ingredient-item">🌹</div><div class="ingredient-item">🌸</div></div>
-                    <div class="ingredient-group" id="ing-lavender"><div class="ingredient-item">🪻</div><div class="ingredient-item">🌿</div></div>
-                    <div class="ingredient-group" id="ing-saffron"><div class="ingredient-item">🌾</div><div class="ingredient-item">🔴</div></div>
-                    <div class="ingredient-group" id="ing-maroki"><div class="ingredient-item">🪵</div><div class="ingredient-item">🏺</div></div>
-                    <div class="ingredient-group" id="ing-cuban"><div class="ingredient-item">🚬</div><div class="ingredient-item">🥃</div></div>
-                    <div class="ingredient-group" id="ing-kalimantan"><div class="ingredient-item">🌴</div><div class="ingredient-item">🛖</div></div>
+                    <div class="ingredient-group" id="ing-azraq">
+                    <div class="ingredient-item"><img src="https://icon2.cleanpng.com/20240205/qtf/transparent-lavender-lavender-bouquet-with-cascading-blue-petals-and-1710886005642.webp" alt="agarwood powder"></div>
+    <div class="ingredient-item"><img src="https://static.vecteezy.com/system/resources/thumbnails/030/571/647/small/lavender-with-ai-generated-free-png.png" alt="golden saffron"></div>
+    <div class="ingredient-item"><img src="https://png.pngtree.com/png-clipart/20241013/original/pngtree-lavender-flower-png-image_16300723.png" alt="damascus rose"></div>
+    <div class="ingredient-item"><img src="droplet.svg" alt="costus plant"></div>
+                    </div>
+                    <div class="ingredient-group" id="ing-leather">
+                     <div class="ingredient-item"><img src="rose1.svg" alt="wood"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="leather"></div>
+    <div class="ingredient-item"><img src="petal.svg" alt="bergamot"></div>
+    <div class="ingredient-item"><img src="droplet.svg" alt="pink peppercorn"></div>
+    <div class="ingredient-item"><img src="rose3.svg" alt="cardamom"></div>
+                    </div>
+                    <div class="ingredient-group" id="ing-ocean">
+                     <div class="ingredient-item"><img src="rose1.svg" alt="citrus"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="ocean salt"></div>
+    <div class="ingredient-item"><img src="petal.svg" alt="wooden and mossy plants"></div>
+    <div class="ingredient-item"><img src="droplet.svg" alt="agarwood"></div>
+    <div class="ingredient-item"><img src="rose3.svg" alt="ocean breeze"></div>
+                    </div>
+                    <div class="ingredient-group" id="ing-royal">
+                     <div class="ingredient-item"><img src="rose1.svg" alt="deer musk"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="amber"></div>
+    <div class="ingredient-item"><img src="petal.svg" alt="lily"></div>
+    <div class="ingredient-item"><img src="droplet.svg" alt="tonka"></div>
+    <div class="ingredient-item"><img src="rose3.svg" alt="roses"></div>
+    
+
+                    </div>
+                    <div class="ingredient-group" id="ing-taifi">
+    <div class="ingredient-item"><img src="rose1.svg" alt="taifi rose"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="jasmine"></div>
+    
+</div>
+                    <div class="ingredient-group" id="ing-lavender">
+                    <div class="ingredient-item"><img src="rose1.svg" alt="spices"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="bergamot"></div>
+    <div class="ingredient-item"><img src="petal.svg" alt="lemon"></div>
+    <div class="ingredient-item"><img src="droplet.svg" alt="lavender"></div>
+    <div class="ingredient-item"><img src="rose3.svg" alt="jasmine"></div>
+        <div class="ingredient-item"><img src="rose3.svg" alt="rose"></div>
+            <div class="ingredient-item"><img src="rose3.svg" alt="cedarwood"></div>
+
+
+                    </div>
+                    <div class="ingredient-group" id="ing-saffron">
+                    <div class="ingredient-item"><img src="rose1.svg" alt="safron"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="kalimantan agarwood"></div>
+                    </div>
+                    <div class="ingredient-group" id="ing-maroki">
+                        <div class="ingredient-item"><img src="rose1.svg" alt="maroki agarwood"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="cambodi agarwood"></div>
+                    </div>
+                    <div class="ingredient-group" id="ing-cuban">
+                    <div class="ingredient-item"><img src="rose1.svg" alt="spices"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="flowers"></div>
+    <div class="ingredient-item"><img src="petal.svg" alt="jasmine"></div>
+    <div class="ingredient-item"><img src="droplet.svg" alt="patchouli"></div>
+    <div class="ingredient-item"><img src="rose3.svg" alt="sandalwood"></div>
+        <div class="ingredient-item"><img src="rose3.svg" alt="rose"></div>
+            <div class="ingredient-item"><img src="rose3.svg" alt="cedarwood"></div>
+                    </div>
+                    <div class="ingredient-group" id="ing-kalimantan">
+                        <div class="ingredient-group" id="ing-maroki">
+                        <div class="ingredient-item"><img src="rose1.svg" alt="kalimantan agarwood"></div>
+    <div class="ingredient-item"><img src="rose2.svg" alt="cambodi agarwood"></div>
+                    </div>
                 </div>
 
                 <div class="scent-showcase-box">
@@ -709,7 +778,7 @@
             { id: 'cuban', color: '#3e2723' }, { id: 'kalimantan', color: '#1a1a1a' }
         ];
 
-        configs.forEach((cfg, i) => {
+configs.forEach((cfg, i) => {
             const panel = `#panel-${cfg.id}`;
             const box = `#box-${cfg.id}`;
             const ings = `#ing-${cfg.id} .ingredient-item`;
@@ -720,12 +789,28 @@
             scentTL.to(panel, { opacity: 1, duration: 1 }, "<");
             scentTL.to(box, { opacity: 1, duration: 1 }, "<");
 
+            // --- REPLACED RANDOM WITH SEMI-CIRCLE ---
             scentTL.to(ings, {
                 opacity: 1,
-                x: () => (Math.random() - 0.5) * window.innerWidth * 0.6,
-                y: () => (Math.random() - 0.5) * window.innerHeight * 0.6,
-                rotation: 360,
-                duration: 2
+                duration: 2,
+                ease: "power2.out",
+                // 'index' is automatically provided by GSAP for each ingredient item
+                x: (index, target, targets) => {
+                    const angle = (index / (targets.length - 1)) * Math.PI; 
+                    const radius = window.innerWidth < 600 ? 130 : 200; 
+                    return -Math.cos(angle) * radius;
+                },
+                y: (index, target, targets) => {
+                    const angle = (index / (targets.length - 1)) * Math.PI;
+                    const radius = window.innerWidth < 600 ? 110 : 160;
+                    return -Math.sin(angle) * radius - 30; // -30 pushes the arc up slightly
+                },
+                rotation: (index, target, targets) => {
+                    // This tilts the SVGs to face outward from the center
+                    const angleDeg = (index / (targets.length - 1)) * 180;
+                    return angleDeg - 90; 
+                },
+                stagger: 0.05
             }, "<");
 
             scentTL.addLabel("snap" + i);
