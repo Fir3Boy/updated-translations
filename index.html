@@ -220,7 +220,6 @@
             letter-spacing: 2px;
         }
         #start-btn {
-            autoAlpha: 0;
             visibility: hidden;
         }
         .features-section {
@@ -247,7 +246,7 @@
             opacity: 1;
             transform: translateY(0);
         }
-                @media (hover: hover) {
+        @media (hover: hover) {
             .feature-item:hover {
                 background: rgba(212, 175, 55, 0.1);
                 transform: translateY(-5px);
@@ -270,29 +269,28 @@
             margin-bottom: 5px;
         }
 
-        /* --- UPDATED SCENTS SECTION STYLES --- 
-           Using Vertical Flow & Absolute Locking
-        */
+ /* --- SCENTS SECTION --- */
         #scents-pin-wrapper {
             height: 1100vh;
             position: relative;
         }
+
         .scents-pinned-stage {
             position: sticky;
             top: 0;
-            height: 100vh;
+            height: 100dvh; /* Uses dynamic height for mobile */
             width: 100%;
             overflow: hidden;
-            display: flex;
-            flex-direction: column; /* VERTICAL FLOW: Title -> Box -> Desc */
-            align-items: center;
-            justify-content: center;
             background-color: #1a1a1a;
-            transition: background-color 0.8s ease;
+            /* Removed flex here so absolute children can stack perfectly */
         }
-        
+
+        /* 1. LOCK THE BOX DEAD CENTER */
         .scent-showcase-box {
-            position: relative; /* STABLE LAYOUT in flex flow */
+            position: absolute; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Perfect center */
             z-index: 10;
             width: 320px;
             height: 320px;
@@ -300,7 +298,6 @@
             align-items: center;
             justify-content: center;
             pointer-events: none;
-            margin: 20px 0;
         }
 
         .box-img {
@@ -317,48 +314,7 @@
             z-index: 11;
         }
 
-        .scents-panels {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 20;
-        }
-        .scent-panel {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        
-        /* ABSOLUTE LOCKING: Title at top 10%, Description at bottom 10% */
-        .scent-panel h2 {
-            position: absolute;
-            top: 10%; 
-            font-size: 2.8rem;
-            margin: 0;
-            color: #d4af37;
-            width: 90%;
-        }
-        .scent-panel p {
-            position: absolute;
-            bottom: 10%;
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin: 0;
-            color: #eee;
-            max-width: 450px;
-            width: 90%;
-        }
-
+        /* 2. LOCK INGREDIENTS DEAD CENTER BEHIND BOX */
         .ingredient-container {
             position: absolute;
             top: 50%;
@@ -384,6 +340,49 @@
             display: flex; align-items: center; justify-content: center;
         }
 
+        /* 3. FLEXBOX FOR THE TEXT PANELS */
+        .scents-panels {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100dvh;
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        .scent-panel {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes Title up, Description down */
+            align-items: center;
+            padding: 12dvh 20px 15dvh 20px; /* Safe areas for iPhone notch & home bar */
+            box-sizing: border-box;
+        }
+        
+        /* Removed absolute positioning from text! Flexbox handles it now. */
+        .scent-panel h2 {
+            font-size: 2.8rem;
+            margin: 0;
+            color: #d4af37;
+            text-align: center;
+        }
+
+        .scent-panel p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 0;
+            color: #eee;
+            max-width: 450px;
+            text-align: center;
+        }
+
         /* --- Footer Styling --- */
         footer {
             background-color: #1a1a1a;
@@ -396,7 +395,7 @@
         .footer-links a { color: #d4af37; text-decoration: none; font-size: 0.85rem; transition: color 0.3s; }
         .footer-links a:hover { color: #fff; }
 
-        /* 6. ANIMATIONS & RESPONSIVE SPACING */
+        /* 6. ANIMATIONS & RESPONSIVE */
         @keyframes simpleFade { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
         @keyframes shrinkName { 0% { opacity: 1; max-width: 150px; } 100% { opacity: 0; max-width: 0px; margin-right: 0px; } }
         @keyframes crystalShine {
@@ -413,27 +412,23 @@
             transform: translateX(-100%);
             animation: crystalShine 4s infinite;
         }
-        @media screen and (max-width: 800px) {
-            .scent-panel {
-                left: 50%;
-                top: 80%;
-                transform: translate(-50%, -50%);
-                text-align: center;
-                width: 90%;
-            }
-            .scent-showcase-box {
-                width: 280px;
-                height: 280px;
-                top: 40%;
-            }
-        }
-        
+
         @media screen and (max-width: 600px) {
             h1, #product-name { font-size: 2.2rem; }
-            .scent-showcase-box { width: 260px; height: 260px; }
-            .scent-panel h2 { font-size: 2rem; top: 12%; }
-            .scent-panel p { font-size: 1rem; bottom: 12%; }
             .ignite-btn { width: 85%; padding: 20px; }
+            
+            /* Shrink box slightly for mobile */
+            .scent-showcase-box { 
+                width: 250px; 
+                height: 250px; 
+            }
+            .scent-panel h2 { 
+                font-size: 2rem; 
+            }
+            .scent-panel p { 
+                font-size: 1rem; 
+                max-width: 300px; 
+            }
         }
     </style>
 </head>
@@ -490,7 +485,7 @@
                     <strong>Burning Time</strong>
                     <p>A single stick burns for around an hour.</p>
                 </div>
-                  <div class="feature-item">
+                <div class="feature-item">
                     <strong>Concentrated Power</strong>
                     <p>1 stick offers the scent strength equivalent to 1 kg of natural agarwood.</p>
                 </div>
@@ -521,7 +516,6 @@
         <div id="scents-pin-wrapper">
             <section class="scents-pinned-stage">
                 
-                <!-- INGREDIENTS LAYER -->
                 <div class="ingredient-container">
                     <div class="ingredient-group" id="ing-azraq"><div class="ingredient-item">🪵</div><div class="ingredient-item">✨</div></div>
                     <div class="ingredient-group" id="ing-leather"><div class="ingredient-item">👞</div><div class="ingredient-item">🍂</div></div>
@@ -535,7 +529,6 @@
                     <div class="ingredient-group" id="ing-kalimantan"><div class="ingredient-item">🌴</div><div class="ingredient-item">🛖</div></div>
                 </div>
 
-                <!-- CENTRAL BOX (Locked in middle of flex flow) -->
                 <div class="scent-showcase-box">
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OceanWoodeoud-IncenseSticks-ProductPhoto-_2_1024x1024.png?v=1761769064" id="box-cover" class="box-img" alt="Collection">
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OudAzraqeoud-IncenseSticks-ProductPhoto-_1_1024x1024.png?v=1761817674" class="box-img" id="box-azraq">
@@ -550,7 +543,6 @@
                     <img src="https://uksurrati.com/cdn/shop/files/Bukhoor-OudKalimantaneoud-IncenseSticks-ProductPhoto-_3_1024x1024.png?v=1761769238" class="box-img" id="box-kalimantan">
                 </div>
 
-                <!-- TEXT PANELS (Absolute locked text) -->
                 <div class="scents-panels">
                     <div class="scent-panel" id="panel-azraq"><h2>Oud Azraq</h2><p>Deep, woody, and pure agarwood essence.</p></div>
                     <div class="scent-panel" id="panel-leather"><h2>Leather Hail</h2><p>Warm, woody, and sophisticated leather blend.</p></div>
@@ -730,8 +722,8 @@
 
             scentTL.to(ings, {
                 opacity: 1,
-                x: () => (Math.random() - 0.5) * 600,
-                y: () => (Math.random() - 0.5) * 600,
+                x: () => (Math.random() - 0.5) * window.innerWidth * 0.6,
+                y: () => (Math.random() - 0.5) * window.innerHeight * 0.6,
                 rotation: 360,
                 duration: 2
             }, "<");
@@ -743,9 +735,13 @@
                 scentTL.to([panel, box, ings], { opacity: 0, duration: 1 });
             }
         });
-
-        // Intersection Observer for feature cards
-        document.querySelectorAll('.feature-item').forEach(i => observer.observe(i));
+    
     </script>
 </body>
 </html>
+
+
+
+
+
+
